@@ -33,6 +33,7 @@ return [
     'userFields' => [
         // Return array field name => database column name
         'id' => 'id',
+        'username' => 'email',
     ],
 
     /*
