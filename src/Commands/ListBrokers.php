@@ -43,5 +43,7 @@ class ListBrokers extends Command
         $brokers = $brokerClass::all(['id', 'name', 'secret'])->toArray();
 
         $this->table($headers, $brokers);
+
+        return 0;
     }
 }

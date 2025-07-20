@@ -42,5 +42,7 @@ class DeleteBroker extends Command
         $broker->delete();
 
         $this->info('Broker with name `' . $this->argument('name') . '` successfully deleted.');
+
+        return 0;
     }
 }

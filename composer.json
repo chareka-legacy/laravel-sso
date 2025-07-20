@@ -13,9 +13,9 @@
       }
     ],
     "require": {
-        "php": ">=7.1.3",
-        "guzzlehttp/guzzle": "^6.3",
-        "laravel/framework": "^5.5",
+        "php": ">=8.0",
+        "guzzlehttp/guzzle": "^7.0",
+        "laravel/framework": "^12.0",
         "zefy/php-simple-sso": "^1.0"
     },
     "autoload": {
@@ -29,5 +29,10 @@
             "Zefy\\LaravelSSO\\SSOServiceProvider"
         ]
       }
+    },
+    "config": {
+        "allow-plugins": {
+            "kylekatarnls/update-helper": true
+        }
     }
 }
