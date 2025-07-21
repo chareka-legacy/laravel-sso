@@ -2,6 +2,7 @@
 
 namespace Zefy\LaravelSSO;
 
+use GuzzleHttp\Exception\GuzzleException;
 use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Str;
 use Zefy\LaravelSSO\Exceptions\MissingConfigurationException;
@@ -25,7 +26,7 @@ class LaravelSSOBroker extends SSOBroker
      *
      * @return string
      */
-    protected function generateCommandUrl(string $command, array $parameters = [])
+    protected function generateCommandUrl(string $command, array $parameters = []): string
     {
         $query = '';
         if (!empty($parameters)) {
@@ -42,7 +43,7 @@ class LaravelSSOBroker extends SSOBroker
      *
      * @throws MissingConfigurationException
      */
-    protected function setOptions()
+    protected function setOptions(): void
     {
         $this->ssoServerUrl = config('laravel-sso.serverUrl', null);
         $this->brokerName = config('laravel-sso.brokerName', null);
@@ -58,7 +59,7 @@ class LaravelSSOBroker extends SSOBroker
      *
      * @return void
      */
-    protected function saveToken()
+    protected function saveToken(): void
     {
         if (isset($this->token) && $this->token) {
             return;
@@ -81,7 +82,7 @@ class LaravelSSOBroker extends SSOBroker
      *
      * @return void
      */
-    protected function deleteToken()
+    protected function deleteToken(): void
     {
         $this->token = null;
         Cookie::forget($this->getCookieName());
@@ -95,8 +96,9 @@ class LaravelSSOBroker extends SSOBroker
      * @param array $parameters Parameters for URL query string if GET request and form parameters if it's POST request.
      *
      * @return array
+     * @throws GuzzleException
      */
-    protected function makeRequest(string $method, string $command, array $parameters = [])
+    protected function makeRequest(string $method, string $command, array $parameters = []): array
     {
         $commandUrl = $this->generateCommandUrl($command);
 
@@ -105,17 +107,11 @@ class LaravelSSOBroker extends SSOBroker
             'Authorization' => 'Bearer '. $this->getSessionId(),
         ];
 
-        switch ($method) {
-            case 'POST':
-                $body = ['form_params' => $parameters];
-                break;
-            case 'GET':
-                $body = ['query' => $parameters];
-                break;
-            default:
-                $body = [];
-                break;
-        }
+        $body = match ($method) {
+            'POST' => ['form_params' => $parameters],
+            'GET' => ['query' => $parameters],
+            default => [],
+        };
 
         $client = new GuzzleHttp\Client;
         $response = $client->request($method, $commandUrl, $body + ['headers' => $headers]);
@@ -132,7 +128,7 @@ class LaravelSSOBroker extends SSOBroker
      *
      * @return void
      */
-    protected function redirect(string $url, array $parameters = [], int $httpResponseCode = 307)
+    protected function redirect(string $url, array $parameters = [], int $httpResponseCode = 307): void
     {
         $query = '';
         // Making URL query string if parameters given.
@@ -154,7 +150,7 @@ class LaravelSSOBroker extends SSOBroker
      *
      * @return string
      */
-    protected function getCurrentUrl()
+    protected function getCurrentUrl(): string
     {
         return url()->full();
     }
@@ -164,7 +160,7 @@ class LaravelSSOBroker extends SSOBroker
      *
      * @return string
      */
-    protected function getCookieName()
+    protected function getCookieName(): string
     {
         // Cookie name based on broker's name because there can be some brokers on same domain
         // and we need to prevent duplications.

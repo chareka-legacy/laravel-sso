@@ -143,3 +143,26 @@ SSO_SERVER_URL=https://server.test
 SSO_BROKER_NAME=site1
 SSO_BROKER_SECRET=892asjdajsdksja74jh38kljk2929023
 ```
+
+### Usage Options
+
+#### User creating/fetching mapping
+When mapping user creation use inside `config/laravel-sso.php`:
+```php
+    // Logged in user fields sent to brokers.
+    'userFields' => [
+        // Return array field name => database column name
+        'id' => 'id',
+        'name' => 'name',
+        'email' => 'email',
+    ],
+```
+And if broker uses different names for user fields:
+```php
+// probably in your service provider
+\Zefy\LaravelSSO\Middleware\SSOAutoLogin::createOrFindUserUsing(function (array $data){
+    return User::firstOrCreate([
+        'name_on_broker' => $data['name_from_server']
+    ]);
+});
+```
