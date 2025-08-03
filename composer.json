@@ -1,5 +1,6 @@
 {
     "name": "laravel-auto/sso",
+    "version": "1.0.0",
     "description": "Simple PHP SSO integration for Laravel",
     "keywords": ["laravel", "sso", "authentication", "login"],
     "homepage": "https://github.com/chareka-legacy/laravel-sso",

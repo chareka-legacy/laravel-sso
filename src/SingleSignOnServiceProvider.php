@@ -1,25 +1,26 @@
 <?php
 
-namespace Zefy\LaravelSSO;
+namespace LaravelAuto\Sso;
 
+use Illuminate\Contracts\Container\BindingResolutionException;
 use Illuminate\Support\ServiceProvider;
 use LaravelAuto\Sso\Commands;
 
-class SSOServiceProvider extends ServiceProvider
+class SingleSignOnServiceProvider extends ServiceProvider
 {
     /**
      * Configuration file name.
      *
      * @var string
      */
-    protected $configFileName = 'laravel-sso.php';
+    protected string $configFileName = 'laravel-sso.php';
 
     /**
      * Bootstrap services.
      *
      * @return void
      */
-    public function boot()
+    public function boot(): void
     {
         $this->publishConfig(__DIR__ . '/../config/' . $this->configFileName);
 
@@ -40,8 +41,9 @@ class SSOServiceProvider extends ServiceProvider
      * Register services.
      *
      * @return void
+     * @throws BindingResolutionException
      */
-    public function register()
+    public function register(): void
     {
         $this->app->make('Zefy\LaravelSSO\Controllers\ServerController');
     }
@@ -51,7 +53,7 @@ class SSOServiceProvider extends ServiceProvider
      *
      * @return string
      */
-    protected function getConfigPath()
+    protected function getConfigPath(): string
     {
         return config_path($this->configFileName);
     }
@@ -61,7 +63,7 @@ class SSOServiceProvider extends ServiceProvider
      *
      * @param string $configPath
      */
-    protected function publishConfig(string $configPath)
+    protected function publishConfig(string $configPath): void
     {
         $this->publishes([$configPath => $this->getConfigPath()]);
     }
@@ -71,7 +73,7 @@ class SSOServiceProvider extends ServiceProvider
      *
      * @return void
      */
-    protected function loadRoutes()
+    protected function loadRoutes(): void
     {
         // If this page is server, load routes which is required for the server.
         if (config('laravel-sso.type') == 'server') {

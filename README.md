@@ -1,20 +1,20 @@
 # Simple PHP SSO integration for Laravel
 
-[![Latest Stable Version](https://poser.pugx.org/zefy/laravel-sso/v/stable)](https://packagist.org/packages/zefy/laravel-sso)
-[![Total Downloads](https://poser.pugx.org/zefy/laravel-sso/downloads)](https://packagist.org/packages/zefy/laravel-sso)
-[![Latest Unstable Version](https://poser.pugx.org/zefy/laravel-sso/v/unstable)](https://packagist.org/packages/zefy/laravel-sso)
-[![License](https://poser.pugx.org/zefy/laravel-sso/license)](https://packagist.org/packages/zefy/laravel-sso)
-[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/zefy/laravel-sso/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/zefy/laravel-sso/?branch=master)
-[![Build Status](https://scrutinizer-ci.com/g/zefy/laravel-sso/badges/build.png?b=master)](https://scrutinizer-ci.com/g/zefy/laravel-sso/build-status/master)
-[![Code Intelligence Status](https://scrutinizer-ci.com/g/zefy/laravel-sso/badges/code-intelligence.svg?b=master)](https://scrutinizer-ci.com/code-intelligence)
+[![Latest Stable Version](https://poser.pugx.org/laravel-auto/sso/v/stable)](https://packagist.org/packages/laravel-auto/sso)
+[![Total Downloads](https://poser.pugx.org/laravel-auto/sso/downloads)](https://packagist.org/packages/laravel-auto/sso)
+[![Latest Unstable Version](https://poser.pugx.org/laravel-auto/sso/v/unstable)](https://packagist.org/packages/laravel-auto/sso)
+[![License](https://poser.pugx.org/laravel-auto/sso/license)](https://packagist.org/packages/laravel-auto/sso)
+[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/laravel-auto/sso/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/laravel-auto/sso/?branch=master)
+[![Build Status](https://scrutinizer-ci.com/g/laravel-auto/sso/badges/build.png?b=master)](https://scrutinizer-ci.com/g/laravel-auto/sso/build-status/master)
+[![Code Intelligence Status](https://scrutinizer-ci.com/g/laravel-auto/sso/badges/code-intelligence.svg?b=master)](https://scrutinizer-ci.com/code-intelligence)
 
 <p align="center"><img src="https://laravel.com/assets/img/components/logo-laravel.svg"></p>
 
 
 This package based on [Simple PHP SSO skeleton](https://github.com/zefy/php-simple-sso) package and made suitable for Laravel framework.
 ### Requirements
-* Laravel 5.5+
-* PHP 7.1+
+* Laravel 10.0+
+* PHP 7.4+
 
 ### Words meanings
 * ***SSO*** - Single Sign-On.
@@ -29,19 +29,19 @@ Client visits Broker and unique token is generated. When new token is generated 
 ### Server
 Install this package using composer.
 ```shell
-$ composer require zefy/laravel-sso
+$ composer require laravel-auto/sso
 ```
 
 
 Copy config file to Laravel project `config/` folder.
 ```shell
-$ php artisan vendor:publish --provider="Zefy\LaravelSSO\SSOServiceProvider"
+$ php artisan vendor:publish --provider="LaravelAuto\Sso\SingleSignOnServiceProvider"
 ```
 
 
 Create table where all brokers will be saved.
 ```shell
-$ php artisan migrate --path=vendor/zefy/laravel-sso/database/migrations
+$ php artisan migrate --path=vendor/laravel-auto/sso/database/migrations
 ```
 
 
@@ -66,13 +66,13 @@ $ php artisan sso:broker:create {name}
 ### Broker
 Install this package using composer.
 ```shell
-$ composer require zefy/laravel-sso
+$ composer require laravel-auto/sso
 ```
 
 
 Copy config file to Laravel project `config/` folder.
 ```shell
-$ php artisan vendor:publish --provider="Zefy\LaravelSSO\SSOServiceProvider"
+$ php artisan vendor:publish --provider="LaravelAuto\Sso\SingleSignOnServiceProvider"
 ```
 
 
@@ -91,7 +91,7 @@ SSO_BROKER_SECRET=
 
 
 
-Edit your `app/Http/Kernel.php` by adding `\Zefy\LaravelSSO\Middleware\SSOAutoLogin::class` middleware to `web` middleware group. It should look like this:
+Edit your `app/Http/Kernel.php` by adding `\LaravelAuto\Sso\Middleware\SingleSignOnVerification::class` middleware to `web` middleware group. It should look like this:
 
 ```php
 protected $middlewareGroups = [
