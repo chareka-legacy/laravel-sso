@@ -4,9 +4,6 @@
 [![Total Downloads](https://poser.pugx.org/laravel-auto/sso/downloads)](https://packagist.org/packages/laravel-auto/sso)
 [![Latest Unstable Version](https://poser.pugx.org/laravel-auto/sso/v/unstable)](https://packagist.org/packages/laravel-auto/sso)
 [![License](https://poser.pugx.org/laravel-auto/sso/license)](https://packagist.org/packages/laravel-auto/sso)
-[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/laravel-auto/sso/badges/quality-score.png?b=main)](https://scrutinizer-ci.com/g/laravel-auto/sso/?branch=main)
-[![Build Status](https://scrutinizer-ci.com/g/laravel-auto/sso/badges/build.png?b=main)](https://scrutinizer-ci.com/g/laravel-auto/sso/build-status/main)
-[![Code Intelligence Status](https://scrutinizer-ci.com/g/laravel-auto/sso/badges/code-intelligence.svg?b=main)](https://scrutinizer-ci.com/code-intelligence)
 
 This package based on [Simple PHP SSO skeleton](https://github.com/zefy/php-simple-sso) package and made suitable for Laravel framework.
 
