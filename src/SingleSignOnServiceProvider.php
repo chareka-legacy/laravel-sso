@@ -5,6 +5,7 @@ namespace LaravelAuto\Sso;
 use Illuminate\Contracts\Container\BindingResolutionException;
 use Illuminate\Support\ServiceProvider;
 use LaravelAuto\Sso\Commands;
+use LaravelAuto\Sso\Controllers\ServerController;
 
 class SingleSignOnServiceProvider extends ServiceProvider
 {
@@ -45,7 +46,7 @@ class SingleSignOnServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
-        $this->app->make('Zefy\LaravelSSO\Controllers\ServerController');
+        $this->app->make(ServerController::class);
     }
 
     /**
