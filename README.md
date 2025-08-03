@@ -92,11 +92,12 @@ SSO_BROKER_SECRET=
 
 
 Edit your `app/Http/Kernel.php` by adding `\Zefy\LaravelSSO\Middleware\SSOAutoLogin::class` middleware to `web` middleware group. It should look like this:
+
 ```php
 protected $middlewareGroups = [
         'web' => [
             ...
-            \Zefy\LaravelSSO\Middleware\SSOAutoLogin::class,
+            \LaravelAuto\Sso\Middleware\SingleSignOnVerification::class,
         ],
 
         'api' => [
@@ -108,10 +109,11 @@ protected $middlewareGroups = [
 
 
 Last but not least, you need to edit `app/Http/Controllers/Auth/LoginController.php`. You should add two functions into `LoginController` class which will authenticate your client through SSO server but not your Broker page.
+
 ```php
 protected function attemptLogin(Request $request)
 {
-    $broker = new \Zefy\LaravelSSO\LaravelSSOBroker;
+    $broker = new \LaravelAuto\Sso\SingleSignOnBroker;
     
     $credentials = $this->credentials($request);
     return $broker->login($credentials[$this->username()], $credentials['password']);
@@ -119,7 +121,7 @@ protected function attemptLogin(Request $request)
 
 public function logout(Request $request)
 {
-    $broker = new \Zefy\LaravelSSO\LaravelSSOBroker;
+    $broker = new \LaravelAuto\Sso\SingleSignOnBroker;
     
     $broker->logout();
     
@@ -158,9 +160,10 @@ When mapping user creation use inside `config/laravel-sso.php`:
     ],
 ```
 And if broker uses different names for user fields:
+
 ```php
 // probably in your service provider
-\Zefy\LaravelSSO\Middleware\SSOAutoLogin::createOrFindUserUsing(function (array $data){
+\LaravelAuto\Sso\Middleware\SingleSignOnVerification::createOrFindUserUsing(function (array $data){
     return User::firstOrCreate([
         'name_on_broker' => $data['name_from_server']
     ]);

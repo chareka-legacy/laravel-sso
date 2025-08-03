@@ -1,18 +1,18 @@
 <?php
 
-namespace Zefy\LaravelSSO\Middleware;
+namespace LaravelAuto\Sso\Middleware;
 
 use Closure;
 use Illuminate\Http\Request;
-use Zefy\LaravelSSO\LaravelSSOBroker;
+use LaravelAuto\Sso\SingleSignOnBroker;
 
-class SSOAutoLogin
+class SingleSignOnVerification
 {
     private static ?Closure $createOrFindUserCallback = null;
 
     public static function createOrFindUserUsing(Closure $callback): void
     {
-        SSOAutoLogin::$createOrFindUserCallback = $callback;
+        SingleSignOnVerification::$createOrFindUserCallback = $callback;
     }
 
     /**
@@ -24,7 +24,7 @@ class SSOAutoLogin
      */
     public function handle(Request $request, Closure $next)
     {
-        $broker = new LaravelSSOBroker();
+        $broker = new SingleSignOnBroker();
         $response = $broker->getUserInfo();
 
         // If client is logged out in SSO server but still logged in broker.
@@ -39,7 +39,7 @@ class SSOAutoLogin
 
         // If client is logged in SSO server and didn't logged in broker...
         if (isset($response['data']) && auth()->guest()) {
-            $callback = SSOAutoLogin::$createOrFindUserCallback ?? function ($data) {
+            $callback = SingleSignOnVerification::$createOrFindUserCallback ?? function ($data) {
                 return config('laravel-sso.usersModel')::query()->firstOrCreate($data);
             };
 

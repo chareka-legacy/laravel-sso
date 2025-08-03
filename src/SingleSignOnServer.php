@@ -1,15 +1,15 @@
 <?php
 
-namespace Zefy\LaravelSSO;
+namespace LaravelAuto\Sso;
 
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Session;
 use Zefy\SimpleSSO\SSOServer;
-use Zefy\LaravelSSO\Resources\UserResource;
+use LaravelAuto\Sso\Resources\UserResource;
 
-class LaravelSSOServer extends SSOServer
+class SingleSignOnServer extends SSOServer
 {
     /**
      * Redirect to provided URL with query string.

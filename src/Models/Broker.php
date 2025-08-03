@@ -1,6 +1,6 @@
 <?php
 
-namespace Zefy\LaravelSSO\Models;
+namespace LaravelAuto\Sso\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
@@ -11,7 +11,7 @@ class Broker extends Model
      *
      * @return string
      */
-    public function getTable()
+    public function getTable(): string
     {
         return config('laravel-sso.brokersTable', 'brokers');
     }

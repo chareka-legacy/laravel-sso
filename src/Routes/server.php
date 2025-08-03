@@ -1,11 +1,11 @@
 <?php
 
 /**
- * Routes which is neccessary for the SSO server.
+ * Routes which is necessary for the SSO server.
  */
 
 use Illuminate\Support\Facades\Route;
-use Zefy\LaravelSSO\Controllers\ServerController;
+use LaravelAuto\Sso\Controllers\ServerController;
 
 Route::middleware('api')
     ->prefix('api/sso')

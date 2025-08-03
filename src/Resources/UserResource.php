@@ -1,6 +1,6 @@
 <?php
 
-namespace Zefy\LaravelSSO\Resources;
+namespace LaravelAuto\Sso\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 

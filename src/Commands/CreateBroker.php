@@ -1,6 +1,6 @@
 <?php
 
-namespace Zefy\LaravelSSO\Commands;
+namespace LaravelAuto\Sso\Commands;
 
 use Illuminate\Console\Command;
 use Illuminate\Support\Str;

@@ -1,11 +1,11 @@
 <?php
 
-namespace Zefy\LaravelSSO;
+namespace LaravelAuto\Sso;
 
 use GuzzleHttp\Exception\GuzzleException;
 use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Str;
-use Zefy\LaravelSSO\Exceptions\MissingConfigurationException;
+use LaravelAuto\Sso\Exceptions\MissingConfigurationException;
 use Zefy\SimpleSSO\SSOBroker;
 use GuzzleHttp;
 
@@ -16,7 +16,7 @@ use GuzzleHttp;
  *
  * @package Zefy\SimpleSSO
  */
-class LaravelSSOBroker extends SSOBroker
+class SingleSignOnBroker extends SSOBroker
 {
     /**
      * Generate request url.

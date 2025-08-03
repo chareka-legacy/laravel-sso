@@ -24,7 +24,7 @@ return [
      */
 
     'usersModel' => \App\Models\User::class,
-    'brokersModel' => Zefy\LaravelSSO\Models\Broker::class,
+    'brokersModel' => LaravelAuto\Sso\Models\Broker::class,
 
     // Table used in Zefy\LaravelSSO\Models\Broker model
     'brokersTable' => 'brokers',

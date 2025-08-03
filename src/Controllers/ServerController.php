@@ -1,20 +1,20 @@
 <?php
 
-namespace Zefy\LaravelSSO\Controllers;
+namespace LaravelAuto\Sso\Controllers;
 
 use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Http\Request;
-use Zefy\LaravelSSO\LaravelSSOServer;
+use LaravelAuto\Sso\SingleSignOnServer;
 
 class ServerController extends BaseController
 {
     /**
      * @param Request $request
-     * @param LaravelSSOServer $server
+     * @param SingleSignOnServer $server
      *
      * @return void
      */
-    public function attach(Request $request, LaravelSSOServer $server)
+    public function attach(Request $request, SingleSignOnServer $server)
     {
         $server->attach(
             $request->get('broker', null),
@@ -25,11 +25,11 @@ class ServerController extends BaseController
 
     /**
      * @param Request $request
-     * @param LaravelSSOServer $server
+     * @param SingleSignOnServer $server
      *
      * @return mixed
      */
-    public function login(Request $request, LaravelSSOServer $server)
+    public function login(Request $request, SingleSignOnServer $server)
     {
         return $server->login(
             $request->get('username', null),
@@ -38,21 +38,21 @@ class ServerController extends BaseController
     }
 
     /**
-     * @param LaravelSSOServer $server
+     * @param SingleSignOnServer $server
      *
      * @return string
      */
-    public function logout(LaravelSSOServer $server)
+    public function logout(SingleSignOnServer $server)
     {
         return $server->logout();
     }
 
     /**
-     * @param LaravelSSOServer $server
+     * @param SingleSignOnServer $server
      *
      * @return string
      */
-    public function userInfo(LaravelSSOServer $server)
+    public function userInfo(SingleSignOnServer $server)
     {
         return $server->userInfo();
     }
